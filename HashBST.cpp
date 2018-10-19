@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <list>
 
 
 
@@ -126,6 +127,7 @@ class BST{
             return 0;
         }
     public: 
+
         void add(Te val){
             if (root){
                 this->add_Help(root, val);
@@ -151,27 +153,37 @@ class BST{
         }
 };
 
-int main() {
+template <class Te>
+class Hash{
+    public: 
+        int num;
+        BST<Te> *table;
+    public:
+        Hash(int num){
+            this->num = num;
+            table = new BST<Te>[num];
+        }
+        void insertItem(Te item){
+            int index = hashFunction(item);
+            table[index].add(item);
+        }
+        
+        void deleteItem(Te item){
+            int index = hashFunction(item);
+            table[index].remove(item);
+        }
+        void displayHash(){
+            for (int i = 0; i < num; i++){
+                std::cout << "-----" << i << "-----" << std::endl;;
+                table[i].print();
+                std::cout << std::endl;
+            }
+        }
+        
+        int hashFunction(Te item){
+            return (item % num);
+        }
 
-    BST<int> *bst = new BST<int>();
-    bst->add(3);
-    bst->add(2);
-    bst->add(5);
-    bst->add(4);
-    bst->add(7);
-    bst->add(6);
-    bst->print();
-    bst->del(7);
-    bst->print();
-    bst->del(3);
-    bst->print();
-    std::cout << bst->find(2) << bst->find(3) << bst->find(10) << std::endl;
-    std::cout << "100" << std::endl;
-    
- 
+};
 
 
-
-    return 0;
-
-}

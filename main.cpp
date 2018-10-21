@@ -1,3 +1,8 @@
+//Brian Nelson
+//Basic Hash Table w/ BST Chaining
+
+//TEST HASHBST.CPP
+
 #include "HashBST.cpp"
 #include <iostream>
 
